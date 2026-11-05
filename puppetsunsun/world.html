@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<script>try{if(window.name==="__tr"){document.documentElement.classList.add("tr-in");window.name="";}}catch(e){}</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>世界觀｜PUPPET SUNSUN</title>
+<meta name="description" content="PUPPET SUNSUN 的世界觀（非官方草案）">
+<link rel="icon" href="image/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="image/favicon.png">
+<link rel="apple-touch-icon" href="image/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Huninn&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="hd-left"></div>
+    <a href="index.html" class="logo"><img src="image/logo-white.png" alt="PUPPET SUNSUN"></a>
+    <div class="menu">
+      <button class="menu-btn" type="button" aria-label="選單"><span></span><span></span><span></span></button>
+      <div class="nav-links">
+        <a href="index.html#about">關於</a>
+        <a href="world.html" class="active">世界觀</a>
+        <a href="characters.html">角色介紹</a>
+        <a href="goods.html">周邊商品</a>
+        <a href="quiz.html">小測試</a>
+        <a href="index.html#news">最新消息</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 世界觀：六段影片＋文字組成的長頁
+     進頁面時先是一片黑，等換頁轉場（藍色）撤掉後，黑幕才慢慢淡出
+     第 1 段影片一直循環；第 2～6 段捲到畫面中才開始播，播完一次就停在最後一格（沒有重播鍵，重新整理才會再播）
+     改文字：改每段的 .wv-cap；文字位置：.wv-tr＝右上、.wv-tc＝上方置中 -->
+<div class="wv-black" id="wvBlack" aria-hidden="true"></div>
+<main class="wv">
+  <h1 class="sr-only">世界觀</h1>
+
+  <section class="wv-panel" data-loop>
+    <video class="wv-video" src="image/world-1.mp4" muted loop playsinline preload="auto"></video>
+    <p class="wv-cap wv-tr">SUNSUN與夥伴們生活的地方<br>是一個名為「TOHOK」的布偶之國…</p>
+  </section>
+
+  <section class="wv-panel">
+    <video class="wv-video" src="image/world-2.mp4" muted playsinline preload="metadata"></video>
+    <p class="wv-cap wv-tr">在這裡，也有四季的輪替<br>有溫暖的春天，以及寒冷的冬天…</p>
+  </section>
+
+  <section class="wv-panel">
+    <video class="wv-video" src="image/world-3.mp4" muted playsinline preload="metadata"></video>
+    <p class="wv-cap wv-tc">布偶們也會在特殊的日子裡<br>與夥伴們慶祝節日的到來…</p>
+  </section>
+
+  <section class="wv-panel">
+    <video class="wv-video" src="image/world-4.mp4" muted playsinline preload="metadata"></video>
+    <p class="wv-cap wv-tc">布偶之家是小夥伴們玩耍的秘密基地！<br>今天大家又要做些什麼事呢？</p>
+  </section>
+
+  <section class="wv-panel">
+    <video class="wv-video" src="image/world-5.mp4" muted playsinline preload="metadata"></video>
+    <p class="wv-cap wv-tc">小菜園裡有會唱歌的蟋蟀…飛舞的蝴蝶<br>SUNSUN與NONNON在小菜園裡說些什麼呢？</p>
+  </section>
+
+  <section class="wv-panel wv-last">
+    <video class="wv-video" src="image/world-6.mp4" muted playsinline preload="metadata"></video>
+    <p class="wv-cap wv-tc">在布偶之國，SUNSUN每天都與夥伴們過著快樂的日子<br>期待你的到來！</p>
+    <div class="wv-links">
+      <a class="pill" href="index.html">回到首頁 →</a>
+      <a class="pill" href="https://www.youtube.com/@puppetsunsun_global" target="_blank" rel="noopener">前往頻道 PUPPET SUNSUN Global →</a>
+    </div>
+  </section>
+</main>
+
+<script>
+  // 世界觀：黑幕淡出、影片播放控制
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var root = document.documentElement, black = document.getElementById('wvBlack');
+    var panels = Array.prototype.slice.call(document.querySelectorAll('.wv-panel'));
+    var PLAY = '<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>';
+
+    // 第 2～6 段播完就停在最後一格，不給重播鍵；想再看一次就重新整理頁面
+    panels.forEach(function (p) {
+      var v = p.querySelector('video');
+      v.addEventListener('ended', function () { p.dataset.done = '1'; });
+      // 只有「減少動態」的使用者會有播放鍵：他們的影片不會自動播，要按了才播（播完一樣不會再出現）
+      if (!reduce) return;
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'wv-play'; b.innerHTML = PLAY;
+      b.setAttribute('aria-label', '播放影片');
+      p.appendChild(b);
+      b.addEventListener('click', function () { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); });
+      v.addEventListener('play', function () { b.hidden = true; });
+      v.addEventListener('pause', function () { if (!v.ended) b.hidden = false; });
+    });
+
+    function play(v) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+
+    // 第 2～6 段：捲到一半以上在畫面中才播；離開就先暫停，回來接著播；播完一次就不再自動播
+    function watch() {
+      if (reduce) return;
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          var p = e.target, v = p.querySelector('video');
+          if (e.isIntersecting) { if (p.hasAttribute('data-loop') || !p.dataset.done) play(v); }
+          else if (!v.paused) v.pause();
+        });
+      }, { threshold: 0.55 });
+      panels.forEach(function (p) { io.observe(p); });
+    }
+
+    // 黑幕：等換頁的藍色撤掉（html 上的 tr-in 被拿掉）才開始淡出；直接打開網址時，稍等一下就淡出
+    var shown = false;
+    function show() {
+      if (shown) return; shown = true;
+      black.classList.add('gone');
+      watch();
+    }
+    if (root.classList.contains('tr-in')) {
+      var mo = new MutationObserver(function () { if (!root.classList.contains('tr-in')) { mo.disconnect(); setTimeout(show, 150); } });
+      mo.observe(root, { attributes: true, attributeFilter: ['class'] });
+      setTimeout(show, 4000);
+    } else { setTimeout(show, 400); }
+    // 按上一頁回來時不要再黑一次
+    window.addEventListener('pageshow', function (e) { if (e.persisted) show(); });
+  })();
+</script>
+
+<footer class="ft">
+  <div class="ft-in">
+    <div class="ft-main">
+      <a href="index.html" class="ft-logo"><img src="image/logo-white.png" alt="PUPPET SUNSUN"></a>
+      <p class="ft-lead">官方帳號</p>
+      <ul class="ft-social">
+        <li class="ft-site"><a href="https://puppetsunsun.com/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-2.95a15.7 15.7 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.9 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82A13.7 13.7 0 0 1 12 4.04zM4.26 14a8.2 8.2 0 0 1 0-4h3.38a16.5 16.5 0 0 0 0 4H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A8 8 0 0 1 5.08 16zm2.95-8H5.08a8 8 0 0 1 4.33-3.56A15.7 15.7 0 0 0 8.03 8zM12 19.96A14.1 14.1 0 0 1 10.09 16h3.82A14.1 14.1 0 0 1 12 19.96zM14.34 14H9.66a14.7 14.7 0 0 1 0-4h4.68a14.7 14.7 0 0 1 0 4zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14a16.5 16.5 0 0 0 0-4h3.38a8.2 8.2 0 0 1 0 4h-3.38z"/></svg>
+          <span><b>puppetsunsun.com</b><small>PUPPET SUNSUN 官方網站</small></span></a></li>
+        <li><a href="https://www.tiktok.com/@puppet_sunsun" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          <span><b>@puppet_sunsun</b><small>TikTok</small></span></a></li>
+        <li><a href="https://x.com/puppet_sunsun" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 1.15h7.59l5.25 6.93zm-1.29 19.5h2.04L6.49 3.24H4.3z"/></svg>
+          <span><b>@puppet_sunsun</b><small>X（Twitter）</small></span></a></li>
+        <li><a href="https://www.youtube.com/@puppetsunsun" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6z"/></svg>
+          <span><b>PUPPET SUNSUN / パペットスンスン</b><small>YouTube</small></span></a></li>
+        <li><a href="https://www.youtube.com/@puppetsunsun_global" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6z"/></svg>
+          <span><b>PUPPET SUNSUN Global</b><small>YouTube</small></span></a></li>
+      </ul>
+      <p class="ft-note">※ 本網站為粉絲自行製作之非官方介紹網站，與 PUPPET SUNSUN 官方及相關權利單位並無任何關聯。網站內容僅供參考，如有錯誤或與官方資訊不符之處，請以官方公告為準。角色、圖片及影片等相關著作權均屬原權利人所有。</p>
+    </div>
+
+    <nav class="ft-map" aria-label="網站地圖">
+      <div>
+        <a href="index.html" class="ft-h">首頁</a>
+        <a href="index.html#about">關於</a>
+        <a href="index.html#news">最新消息</a>
+      </div>
+      <div>
+        <a href="characters.html" class="ft-h">角色介紹</a>
+        <a href="nonnon.html">NONNON</a>
+        <a href="sunsun.html">SUNSUN</a>
+        <a href="zonzon.html">ZONZON</a>
+      </div>
+      <div>
+        <a href="world.html" class="ft-h">世界觀</a>
+        <a href="goods.html" class="ft-h">周邊商品</a>
+        <a href="quiz.html" class="ft-h">小測試</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="ft-bottom">
+    <p>© 2026 PUPPET SUNSUN 非官方粉絲站</p>
+    <a href="#" class="ft-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">↑ 回到頂部</a>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

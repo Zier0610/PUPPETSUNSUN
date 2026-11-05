@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<script>try{if(window.name==="__tr"){document.documentElement.classList.add("tr-in");window.name="";}}catch(e){}</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>小測試｜PUPPET SUNSUN</title>
+<meta name="description" content="在布偶之國中，我是哪一位布偶？PUPPET SUNSUN 小測試（非官方）">
+<link rel="icon" href="image/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="image/favicon.png">
+<link rel="apple-touch-icon" href="image/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Huninn&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="hd-left"></div>
+    <a href="index.html" class="logo"><img src="image/logo-white.png" alt="PUPPET SUNSUN"></a>
+    <div class="menu">
+      <button class="menu-btn" type="button" aria-label="選單"><span></span><span></span><span></span></button>
+      <div class="nav-links">
+        <a href="index.html#about">關於</a>
+        <a href="world.html">世界觀</a>
+        <a href="characters.html">角色介紹</a>
+        <a href="goods.html">周邊商品</a>
+        <a href="quiz.html" class="active">小測試</a>
+        <a href="index.html#news">最新消息</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 小測試：高麗菜田底圖慢慢飄動
+     ① 開場：中間一條照片帶由下往上慢慢捲動（照片順序每次隨機），上面蓋著標題和「開始測試」
+     ② 題目卡：白色卡片，答完一題，下一張卡從下面疊上來；選項順序每次打散
+     ③ 結果卡：顯示是哪一位布偶，可跳到角色頁
+     題目、選項、結果文字都在最下面的 <script> 裡（QUESTIONS / RESULTS），直接改字即可 -->
+<main class="qz" id="quiz">
+  <h1 class="sr-only">小測試：在布偶之國中，我是哪一位布偶？</h1>
+
+  <div class="qz-start" id="qzStart">
+    <div class="qz-strip" aria-hidden="true"><div class="qz-track" id="qzTrack"></div></div>
+    <div class="qz-hero">
+      <p class="qz-title">在布偶之國中<br>我是哪一位布偶…?</p>
+      <button class="qz-go" id="qzGo" type="button">開始測試</button>
+    </div>
+  </div>
+
+  <div class="qz-deck" id="qzDeck" aria-live="polite"></div>
+
+  <a class="pill qz-home" id="qzHome" href="index.html" hidden>回到首頁 →</a>
+</main>
+
+<footer class="ft">
+  <div class="ft-in">
+    <div class="ft-main">
+      <a href="index.html" class="ft-logo"><img src="image/logo-white.png" alt="PUPPET SUNSUN"></a>
+      <p class="ft-lead">官方帳號</p>
+      <ul class="ft-social">
+        <li class="ft-site"><a href="https://puppetsunsun.com/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-2.95a15.7 15.7 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.9 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82A13.7 13.7 0 0 1 12 4.04zM4.26 14a8.2 8.2 0 0 1 0-4h3.38a16.5 16.5 0 0 0 0 4H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A8 8 0 0 1 5.08 16zm2.95-8H5.08a8 8 0 0 1 4.33-3.56A15.7 15.7 0 0 0 8.03 8zM12 19.96A14.1 14.1 0 0 1 10.09 16h3.82A14.1 14.1 0 0 1 12 19.96zM14.34 14H9.66a14.7 14.7 0 0 1 0-4h4.68a14.7 14.7 0 0 1 0 4zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14a16.5 16.5 0 0 0 0-4h3.38a8.2 8.2 0 0 1 0 4h-3.38z"/></svg>
+          <span><b>puppetsunsun.com</b><small>PUPPET SUNSUN 官方網站</small></span></a></li>
+        <li><a href="https://www.tiktok.com/@puppet_sunsun" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          <span><b>@puppet_sunsun</b><small>TikTok</small></span></a></li>
+        <li><a href="https://x.com/puppet_sunsun" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 1.15h7.59l5.25 6.93zm-1.29 19.5h2.04L6.49 3.24H4.3z"/></svg>
+          <span><b>@puppet_sunsun</b><small>X（Twitter）</small></span></a></li>
+        <li><a href="https://www.youtube.com/@puppetsunsun" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6z"/></svg>
+          <span><b>PUPPET SUNSUN / パペットスンスン</b><small>YouTube</small></span></a></li>
+        <li><a href="https://www.youtube.com/@puppetsunsun_global" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6z"/></svg>
+          <span><b>PUPPET SUNSUN Global</b><small>YouTube</small></span></a></li>
+      </ul>
+      <p class="ft-note">※ 本網站為粉絲自行製作之非官方介紹網站，與 PUPPET SUNSUN 官方及相關權利單位並無任何關聯。網站內容僅供參考，如有錯誤或與官方資訊不符之處，請以官方公告為準。角色、圖片及影片等相關著作權均屬原權利人所有。</p>
+    </div>
+
+    <nav class="ft-map" aria-label="網站地圖">
+      <div>
+        <a href="index.html" class="ft-h">首頁</a>
+        <a href="index.html#about">關於</a>
+        <a href="index.html#news">最新消息</a>
+      </div>
+      <div>
+        <a href="characters.html" class="ft-h">角色介紹</a>
+        <a href="nonnon.html">NONNON</a>
+        <a href="sunsun.html">SUNSUN</a>
+        <a href="zonzon.html">ZONZON</a>
+      </div>
+      <div>
+        <a href="world.html" class="ft-h">世界觀</a>
+        <a href="goods.html" class="ft-h">周邊商品</a>
+        <a href="quiz.html" class="ft-h">小測試</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="ft-bottom">
+    <p>© 2026 PUPPET SUNSUN 非官方粉絲站</p>
+    <a href="#" class="ft-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">↑ 回到頂部</a>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+(function () {
+  // 開場照片帶用的照片（每次進來隨機排序）
+  var PHOTOS = ['quiz-01', 'quiz-02', 'quiz-03', 'quiz-07', 'quiz-08', 'quiz-09', 'quiz-10', 'nonnon-calm'];
+
+  // 題目：c 是這個選項加分給誰（S＝SUNSUN、N＝NONNON、Z＝ZONZON），可以同時加給兩位
+  var QUESTIONS = [
+    { q: '週末假日的時候，你通常最想做什麼事？', a: [
+      { t: '待在家裡放空、做好玩的事，或者一直在找東西吃。', c: 'S' },
+      { t: '和好朋友悠閒散步、聊聊天，享受慢步調的時光。', c: 'N' },
+      { t: '泡一杯熱茶、看一本喜歡的書，享受安靜的私人時光。', c: 'Z' } ] },
+    { q: '如果今天肚子餓了，你第一個想吃的美食是什麼？', a: [
+      { t: '當然是麵包！不管是吐司、菠蘿包，甚至用麵包夾麵包都可以！', c: 'S' },
+      { t: '軟綿綿、甜甜的點心，或是暖心的熱鬆餅。', c: 'N' },
+      { t: '精緻健康的茶點，或是能細細品味的傳統食物。', c: 'Z' } ] },
+    { q: '當朋友突然問你一個奇奇怪怪、天馬行空的問題時，你的反應是？', a: [
+      { t: '睜大眼睛跟著一起想像：「哇！真的假的？那是什麼感覺？」', c: 'S' },
+      { t: '用溫和、慢條斯理的語氣慢慢回答對方。', c: 'N' },
+      { t: '戴上眼鏡、面帶微笑，用豐富的人生經驗為對方詳細解答。', c: 'Z' } ] },
+    { q: '你覺得自己平常給別人的第一印象是什麼？', a: [
+      { t: '開朗、有點糊塗、可愛又療癒的開心果。', c: 'S' },
+      { t: '脾氣很好、溫柔純樸、讓人覺得很安心的傾聽者。', c: 'NZ' },
+      { t: '成熟穩重、博學多聞、像是大家的安全感來源。', c: 'Z' } ] },
+    { q: '如果不小心遇到突發狀況或小麻煩，你通常會怎麼處理？', a: [
+      { t: '先驚呼一聲，然後用樂觀天真的態度笑著帶過。', c: 'S' },
+      { t: '不急不徐、順其自然，跟著自己的步調慢慢解決。', c: 'N' },
+      { t: '冷靜分析現狀，用智慧與經驗穩妥地處理好一切。', c: 'Z' } ] }
+  ];
+
+  var RESULTS = {
+    S: { name: 'SUNSUN', img: 'image/sunsun-main.jpg', href: 'sunsun.html', color: '#2a7fd4', say: '毛絨絨又天真的開心果，永遠的六歲小男孩！' },
+    N: { name: 'NONNON', img: 'image/head-nonnon.jpg', href: 'nonnon.html', color: '#e2475f', say: '如雪人般溫柔的你，沉著冷靜又富同理心。' },
+    Z: { name: 'ZONZON', img: 'image/head-zonzon.jpg', href: 'zonzon.html', color: '#6b7280', say: '紳士又可靠的你，禮貌優雅還很會逗人笑。' }
+  };
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var stage = document.getElementById('quiz'), start = document.getElementById('qzStart');
+  var deck = document.getElementById('qzDeck'), home = document.getElementById('qzHome');
+  var answers = [];
+
+  function shuffle(list) {
+    var a = list.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  function esc(s) { return s.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  // ① 照片帶：隨機排序後放兩輪，捲到一半剛好接回開頭，看起來就是無限循環
+  var track = document.getElementById('qzTrack');
+  var order = shuffle(PHOTOS);
+  track.innerHTML = order.concat(order).map(function (p, i) {
+    return '<img src="image/' + p + '.jpg" alt="" style="--r:' + (i % 2 ? 1.5 : -1.5) + 'deg">';
+  }).join('');
+
+  // ② 換卡：新卡從下面疊上來，舊卡往後縮進後方的卡堆裡再消失
+  function push(card) {
+    var old = deck.querySelector('.qz-card:not(.out)');
+    if (old) {
+      old.classList.add('out');
+      old.querySelectorAll('button, a').forEach(function (el) { el.tabIndex = -1; });
+      setTimeout(function () { old.remove(); }, reduce ? 0 : 700);
+    }
+    deck.appendChild(card);
+    var h = card.querySelector('[tabindex="-1"]');
+    if (h) setTimeout(function () { h.focus({ preventScroll: true }); }, reduce ? 0 : 450);
+  }
+
+  function ask(n) {
+    var Q = QUESTIONS[n];
+    var card = document.createElement('section');
+    card.className = 'qz-card';
+    card.innerHTML =
+      '<p class="qz-step">' + QUESTIONS.map(function (_, i) { return '<i class="' + (i < n ? 'done' : i === n ? 'now' : '') + '"></i>'; }).join('') +
+        '<span class="sr-only">第 ' + (n + 1) + ' 題，共 ' + QUESTIONS.length + ' 題</span></p>' +
+      '<h2 class="qz-q" tabindex="-1">Q' + (n + 1) + '. ' + esc(Q.q).replace('，', '<br>') + '</h2>' +
+      '<div class="qz-opts">' + shuffle(Q.a).map(function (o) {
+        return '<button type="button" class="qz-opt" data-c="' + o.c + '">' + esc(o.t) + '</button>';
+      }).join('') + '</div>';
+    card.addEventListener('click', function (e) {
+      var b = e.target.closest('.qz-opt');
+      if (!b || card.classList.contains('picked')) return;
+      card.classList.add('picked'); b.classList.add('on');
+      answers.push(b.getAttribute('data-c'));
+      setTimeout(function () { n + 1 < QUESTIONS.length ? ask(n + 1) : result(); }, reduce ? 150 : 420);
+    });
+    push(card);
+  }
+
+  // ③ 計分：選到的布偶各加 1 分，最高分的就是你；同分時看「比較後面的題目」選了誰
+  function winner() {
+    var score = { S: 0, N: 0, Z: 0 };
+    answers.forEach(function (c) { c.split('').forEach(function (k) { score[k]++; }); });
+    var top = Math.max(score.S, score.N, score.Z);
+    for (var i = answers.length - 1; i >= 0; i--) {
+      var hit = answers[i].split('').filter(function (k) { return score[k] === top; });
+      if (hit.length) return hit[0];
+    }
+    return 'S';
+  }
+
+  function result() {
+    var R = RESULTS[winner()];
+    var card = document.createElement('section');
+    card.className = 'qz-card qz-result';
+    card.style.setProperty('--c', R.color);
+    card.innerHTML =
+      '<h2 class="qz-you" tabindex="-1">你是…</h2>' +
+      '<figure class="qz-pic"><img src="' + R.img + '" alt="' + R.name + '"></figure>' +
+      '<p class="qz-name">' + R.name + '!</p>' +
+      '<p class="qz-say">' + esc(R.say) + '</p>' +
+      '<a class="qz-link" href="' + R.href + '">跳轉至 ' + R.name + ' 角色頁面</a>' +
+      '<button type="button" class="qz-again">再測一次</button>';
+    card.querySelector('.qz-again').addEventListener('click', begin);
+    push(card);
+    home.hidden = false;
+    rain();
+  }
+
+  // 結果出來時，像有人從畫面上方中間把 9～12 顆彩色鈕扣（image/btn-01～12.png）往外撒出去：
+  // 每顆有自己的拋出速度，受重力往下掉、有一點空氣阻力，往左右兩邊散開，邊掉邊轉，掉出畫面就消失
+  var GRAVITY = 1500;   // px/秒²，數字越大掉越快
+  function rain() {
+    if (reduce || !window.requestAnimationFrame) return;
+    var old = stage.querySelector('.qz-rain'); if (old) old.remove();
+    var layer = document.createElement('div'); layer.className = 'qz-rain'; layer.setAttribute('aria-hidden', 'true');
+    stage.appendChild(layer);
+    var W = stage.offsetWidth, H = stage.offsetHeight, n = 9 + Math.floor(Math.random() * 4);
+    var pool = shuffle(Array.apply(null, Array(12)).map(function (_, i) { return i + 1; }));
+    var bits = [];
+    for (var i = 0; i < n; i++) {
+      var b = document.createElement('img');
+      var size = 42 + Math.random() * 34;
+      b.src = 'image/btn-' + (pool[i] < 10 ? '0' : '') + pool[i] + '.png'; b.alt = '';
+      b.style.width = size + 'px';
+      layer.appendChild(b);
+      // 左右輪流往外撒，越後面的撒得越開；一開始先往上拋一點，再被重力拉下來
+      var side = i % 2 ? 1 : -1, spread = .25 + .75 * (i / n);
+      bits.push({
+        el: b, size: size, born: 380 + i * 55 + Math.random() * 80,
+        x: W / 2 + (Math.random() - .5) * 60, y: -size,
+        vx: side * spread * (240 + Math.random() * 320) * Math.min(1.4, W / 900),
+        vy: -(120 + Math.random() * 260),
+        a: Math.random() * 360, va: 0
+      });
+    }
+    var t0 = performance.now(), last = t0;
+    requestAnimationFrame(function step(now) {
+      var dt = Math.min(.034, (now - last) / 1000); last = now;
+      var alive = 0;
+      bits.forEach(function (p) {
+        if (p.done) return;
+        alive++;
+        if (now - t0 < p.born) { p.el.style.opacity = 0; return; }
+        p.el.style.opacity = 1;
+        p.vy += GRAVITY * dt;
+        p.vx *= Math.pow(.6, dt);            // 空氣阻力：橫向速度慢慢變小
+        p.x += p.vx * dt; p.y += p.vy * dt;
+        p.va = p.vx * .9;                    // 往哪邊飛就往哪邊轉
+        p.a += p.va * dt;
+        p.el.style.transform = 'translate(' + (p.x - p.size / 2).toFixed(1) + 'px,' + p.y.toFixed(1) + 'px) rotate(' + p.a.toFixed(1) + 'deg)';
+        if (p.y > H + 40) { p.done = true; p.el.remove(); }
+      });
+      if (alive) requestAnimationFrame(step); else layer.remove();
+    });
+  }
+
+  function begin() {
+    answers = [];
+    home.hidden = true;
+    ask(0);
+  }
+
+  document.getElementById('qzGo').addEventListener('click', function () {
+    stage.classList.add('playing');
+    start.classList.add('leave');
+    setTimeout(function () { start.hidden = true; begin(); }, reduce ? 0 : 450);
+  });
+})();
+</script>
+</body>
+</html>
